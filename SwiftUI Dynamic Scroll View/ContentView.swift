@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let colors: [Color] = [.red, .green, .blue]
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        DetectableScrollView {
+            HStack {
+                ForEach(0..<10) { i in
+                    Text("Block \(i)")
+                        .frame(width: 300, height: 300)
+                        .background(colors[i % colors.count])
+                        .id(i)
+                }
+            }
+        } onScrollEnded: {
+            print("scroll ended")
+        }
     }
 }
